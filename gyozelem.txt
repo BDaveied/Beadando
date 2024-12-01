@@ -1,0 +1,3 @@
+Jatekos:3
+dave:1
+Gép:1
