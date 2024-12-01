@@ -32,7 +32,6 @@ public class Tabla {
         }
     }
 
-    // Táblázat megjelenítése
     public void print() {
         System.out.print(" ");
         for (char c = 'a'; c < 'a' + oszlopok; c++) {
@@ -49,7 +48,6 @@ public class Tabla {
         }
     }
 
-    // Korong hozzáadása
     public boolean addKorong(String oszlop, char korong) {
         int osz = oszlop.charAt(0) - 'a';
         if (osz < 0 || osz >= oszlopok) return false;
@@ -63,17 +61,15 @@ public class Tabla {
         return false;
     }
 
-    // Győzelem ellenőrzése
     public boolean gyoztesEllenorzes() {
-        // Függőleges, vízszintes, átlós győzelem ellenőrzése
         for (int r = 0; r < sorok; r++) {
             for (int c = 0; c < oszlopok; c++) {
                 char korong = racs[r][c];
                 if (korong != '.' && (
-                        iranyEllenorzes(r, c, 1, 0, korong) || // Függőleges
-                                iranyEllenorzes(r, c, 0, 1, korong) || // Vízszintes
-                                iranyEllenorzes(r, c, 1, 1, korong) || // Átlós jobbra
-                                iranyEllenorzes(r, c, 1, -1, korong)  // Átlós balra
+                        iranyEllenorzes(r, c, 1, 0, korong) ||
+                                iranyEllenorzes(r, c, 0, 1, korong) ||
+                                iranyEllenorzes(r, c, 1, 1, korong) ||
+                                iranyEllenorzes(r, c, 1, -1, korong)
                 )) {
                     return true;
                 }
@@ -96,7 +92,6 @@ public class Tabla {
         return count == 4;
     }
 
-    // Ellenőrzés, hogy tele van-e a tábla
     public boolean teleVan() {
         for (int j = 0; j < oszlopok; j++) {
             if (racs[0][j] == '.') return false;
@@ -104,13 +99,11 @@ public class Tabla {
         return true;
     }
 
-    // Véletlenszerű oszlop generálása
     public String getVeletlenOszlop() {
         Random random = new Random();
         return String.valueOf((char) ('a' + random.nextInt(oszlopok)));
     }
 
-    // Tábla mentése fájlba
     public void ment(String fajlNev) throws IOException {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fajlNev))) {
             writer.println(sorok + " " + oszlopok);
@@ -123,7 +116,6 @@ public class Tabla {
         }
     }
 
-    // Tábla betöltése fájlból
     public static Tabla betolt(String fajlNev) throws IOException {
         File file = new File(fajlNev);
         if (!file.exists()) {

@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Jatek {
-    private final Tabla tabla = new Tabla(6, 7); // Tipikus 7x6-os tábla
-    private Jatekos ember; // Sárga korong
-    private final Jatekos gep = new Jatekos("Gép", 'P'); // Piros korong
+    private final Tabla tabla = new Tabla(6, 7);
+    private Jatekos ember;
+    private final Jatekos gep = new Jatekos("Gép", 'P');
     private boolean isEmberJon = true;
-    private final Scanner scanner = new Scanner(System.in); // Egyetlen Scanner példány
-    private final GyozelemKezelo gyozelemKezelo = new GyozelemKezelo(); // Győzelemkezelő
+    private final Scanner scanner = new Scanner(System.in);
+    private final GyozelemKezelo gyozelemKezelo = new GyozelemKezelo();
 
     public void start() {
         System.out.print("Add meg a neved: ");
         String emberNev = scanner.nextLine();
-        this.ember = new Jatekos(emberNev, 'S'); // Sárga korong
+        this.ember = new Jatekos(emberNev, 'S');
 
         System.out.println("Üdvözöllek a játékban, " + ember.getNev() + "!");
         tabla.print();
@@ -30,14 +30,14 @@ public class Jatek {
             if (tabla.gyoztesEllenorzes()) {
                 String nyertes = isEmberJon ? ember.getNev() : gep.getNev();
                 System.out.println(nyertes + " Győzőtt!");
-                gyozelemKezelo.frissitGyozelem(nyertes); // Győzelem rögzítése
-                jatekMentes(); // Játékállás mentése győzelem esetén
+                gyozelemKezelo.frissitGyozelem(nyertes);
+                jatekMentes();
                 return;
             }
             isEmberJon = !isEmberJon;
         }
         System.out.println("Woah! Döntetlen!! Nincs több hely a táblán");
-        jatekMentes(); // Döntetlen esetén is mentjük a játékállást
+        jatekMentes();
     }
 
     private void emberKor() {
@@ -57,13 +57,13 @@ public class Jatek {
 
     private void jatekMentes() {
         try {
-            tabla.ment("jatekallas.txt"); // Játékállás mentése
+            tabla.ment("jatekallas.txt");
             System.out.println("A játékállást elmentettük a jatekallas.txt fájlba.");
         } catch (IOException e) {
             System.out.println("Nem sikerült a játékállás mentése: " + e.getMessage());
         }
 
-        // Győzelmi táblázat kiírása
+
         System.out.println("Frissített győzelmi táblázat:");
         gyozelemKezelo.kiirGyozelem();
     }

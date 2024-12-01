@@ -6,7 +6,6 @@ import java.util.*;
 public class GyozelemKezelo {
     private static final String DEFAULT_FILE_NAME = "gyozelem.txt";
 
-    // Alapértelmezett fájlnév lekérése (felülírható a tesztek során)
     protected String getFileName() {
         return DEFAULT_FILE_NAME;
     }
